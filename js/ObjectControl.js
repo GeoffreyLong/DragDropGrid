@@ -80,7 +80,6 @@ $(document).ready(function(){
 					opacity: 1,
 					background: "rgba(255,255,255,0.5)",
 				});
-				$('#mouseFollow').attr("data-name", name);
 				var nameParts = name.split('.');
 				var faviconUrl = '/img/defaultFavicon.png';
 				if (nameParts.length >= 2){
@@ -89,6 +88,7 @@ $(document).ready(function(){
 //NOTER:: NEED CASE WHERE NO FAVICO.ICO
 				var favicon = $('<img src="' + faviconUrl + '" alt="" id="favicon"/>');
 				$('#mouseFollow').append(favicon);
+				$('#mouseFollow').attr("data-name", name);
 			},
 	};
 	$(document).on("keydown", ctrlControl.start());

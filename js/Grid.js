@@ -19,9 +19,8 @@ $(document).ready(function() {
 					cell.attr("data-row", rowIndex);
 					cell.attr("data-isOccupied", false);
 					cell.on("click", function(){
-						alert($("#mouseFollow").css('opacity'));
 						if ($("#mouseFollow").css('opacity') != 0){
-							var name = $("#favicon").attr("data-name");
+							var name = $("#mouseFollow").attr("data-name");
 							alert(name);
 						}
 						/*
