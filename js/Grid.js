@@ -18,9 +18,15 @@ $(document).ready(function() {
 					cell.attr("data-col", colIndex);
 					cell.attr("data-row", rowIndex);
 					cell.attr("data-isOccupied", false);
-					$(cell).on("click", function(){
+					cell.on("click", function(){
+						alert($("#mouseFollow").css('opacity'));
+						if ($("#mouseFollow").css('opacity') != 0){
+							var name = $("#favicon").attr("data-name");
+							alert(name);
+						}
+						/*
 						if (cell.attr("data-isOccupied")==false){
-							var name = $("#favicon".attr("data-name"));
+							
 							var dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
 									100 + "px;'>" + //NOTER:: 50 is a dummy number
 					        		name + //NOTER:: take name out of unknownFun
@@ -50,7 +56,7 @@ $(document).ready(function() {
 							$(this).append(dragged);
 							$("#mouseFollow").empty();
 							$(this).attr("data-isOccupied", "true");
-						}
+						}*/
 					});
 					$("#grid").append(cell);
 				}}
