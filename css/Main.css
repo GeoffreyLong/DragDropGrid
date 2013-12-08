@@ -1,10 +1,9 @@
 body{
-	font-family: 'Conv_Carton-Slab';
 	height: 100%;
 	width:100%;
-	min-height:600px;
-	min-width:525px;
-	overflow:auto;
+	overflow:hidden;
+	margin:0;
+	buffer:0;
 }
 .popForm {
 	padding: 20px 20px 20px 20px;
@@ -27,4 +26,12 @@ body{
 	position:absolute;
 	opacity:0;
 	z-index:10000;
+}
+#grid{
+	position:absolute;
+	top:5%;
+	left:1%;
+	height:90%;
+	width:98%;
+	background: rgba(0,0,0,0.3);
 }

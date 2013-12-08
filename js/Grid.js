@@ -6,11 +6,11 @@ $(document).ready(function() {
 			for (rowIndex = 0; rowIndex<12; rowIndex++){
 				for (colIndex = 0; colIndex<5; colIndex++){
 					var element = $("<div>", {class: "gridded"}); 
-					element.css({"width": 240,
-						"height": 43,
+					element.css({"width": "20%",
+						"height": "8.3%",
 						"position": "absolute",
-						"top" : rowIndex*43,
-						"left" : colIndex*240,
+						"top" : rowIndex*8.3+"%",
+						"left" : colIndex*20+"%",
 						"background-color": "", 
 						"border": "2px solid #FFFFFF"});
 					var elmName = "col"+colIndex+"row"+rowIndex;
