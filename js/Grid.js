@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	/*
 	var grid = {
 		init: function(){
 			var rowIndex = 0;
@@ -19,7 +18,7 @@ $(document).ready(function() {
 					element.attr("data-col", colIndex);
 					element.attr("data-row", rowIndex);
 					element.attr("data-isOccupied", false);
-					element.onClick(function(){
+					$(element).on("click", function(){
 						if (element.attr("data-isOccupied")==false){
 							var name = $("#favicon".attr("data-name"));
 							var dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
@@ -115,7 +114,7 @@ $(document).ready(function() {
 							"margin" : "auto",
 							"font-size" : "18px",
 						});
-						/*dragged.droppable({
+						dragged.droppable({
 							accept: function(e,ui){
 								
 							},
@@ -132,7 +131,7 @@ $(document).ready(function() {
 								//$(this).attr("data-size-row", $(this).attr("data-size-row")+1);
 								//$(this).attr("data-size-col", $(this).attr("data-size-col")+1);
 							},
-						});*//*
+						});
 						dragged.draggable({
 							revert: "invalid",
 							start: function(e,ui){
@@ -179,5 +178,5 @@ $(document).ready(function() {
 		}
 	};
 	grid.init();
-	grid.dropInit();*/
+	grid.dropInit();
 });
