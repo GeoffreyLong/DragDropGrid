@@ -132,9 +132,12 @@ $(document).ready(function() {
 			});
 		}
 	};
-	function Cell(rowIndex, colIndex){
+	
+	
+	function Cell(rowIndex, colIndex, isEmpty){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
+		isEmpty = true;
 		var cell = $("<div>", {class: "gridded"});
 		cell.css({"width": "20%",
 			"height": "8.3%",
@@ -148,9 +151,12 @@ $(document).ready(function() {
 		cell.attr("data-col", colIndex);
 		cell.attr("data-row", rowIndex);
 		cell.attr("data-isOccupied", false);
-		cell.on("click", function(){
-			if ($("#mouseFollow").css('opacity') != 0){
-				var name = $("#mouseFollow").attr("data-name");s
+		cell.on("click", function(e){
+			if ($("#mouseFollow").css('opacity') != 0 && isEmpty){
+				var name = $("#mouseFollow").attr("data-name");
+				$("#mouseFollow").css('opacity','0');
+				$("#mouseFollow").attr("data-name", "");
+				alert(name);
 			}
 			/*
 			if (cell.attr("data-isOccupied")==false){
