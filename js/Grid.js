@@ -5,8 +5,8 @@ $(document).ready(function() {
 			var colIndex = 0;
 			for (rowIndex = 0; rowIndex<12; rowIndex++){
 				for (colIndex = 0; colIndex<5; colIndex++){
-					var element = $("<div>", {class: "gridded"}); 
-					element.css({"width": "20%",
+					var cell = $("<div>", {class: "gridded"}); 
+					cell.css({"width": "20%",
 						"height": "8.3%",
 						"position": "absolute",
 						"top" : rowIndex*8.3+"%",
@@ -14,12 +14,12 @@ $(document).ready(function() {
 						"background-color": "", 
 						"border": "2px solid #FFFFFF"});
 					var elmName = "col"+colIndex+"row"+rowIndex;
-					element.attr("data-id", elmName);
-					element.attr("data-col", colIndex);
-					element.attr("data-row", rowIndex);
-					element.attr("data-isOccupied", false);
-					$(element).on("click", function(){
-						if (element.attr("data-isOccupied")==false){
+					cell.attr("data-id", elmName);
+					cell.attr("data-col", colIndex);
+					cell.attr("data-row", rowIndex);
+					cell.attr("data-isOccupied", false);
+					$(cell).on("click", function(){
+						if (cell.attr("data-isOccupied")==false){
 							var name = $("#favicon".attr("data-name"));
 							var dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
 									100 + "px;'>" + //NOTER:: 50 is a dummy number
@@ -52,7 +52,7 @@ $(document).ready(function() {
 							$(this).attr("data-isOccupied", "true");
 						}
 					});
-					$("#grid").append(element);
+					$("#grid").append(cell);
 				}}
 			
 		},	
