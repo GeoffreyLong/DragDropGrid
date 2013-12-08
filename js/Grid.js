@@ -5,60 +5,10 @@ $(document).ready(function() {
 			var colIndex = 0;
 			for (rowIndex = 0; rowIndex<12; rowIndex++){
 				for (colIndex = 0; colIndex<5; colIndex++){
-					var cell = $("<div>", {class: "gridded"}); 
-					cell.css({"width": "20%",
-						"height": "8.3%",
-						"position": "absolute",
-						"top" : rowIndex*8.3+"%",
-						"left" : colIndex*20+"%",
-						"background-color": "", 
-						"border": "2px solid #FFFFFF"});
-					var elmName = "col"+colIndex+"row"+rowIndex;
-					cell.attr("data-id", elmName);
-					cell.attr("data-col", colIndex);
-					cell.attr("data-row", rowIndex);
-					cell.attr("data-isOccupied", false);
-					cell.on("click", function(){
-						if ($("#mouseFollow").css('opacity') != 0){
-							var name = $("#mouseFollow").attr("data-name");
-							alert(name);
-						}
-						/*
-						if (cell.attr("data-isOccupied")==false){
-							
-							var dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
-									100 + "px;'>" + //NOTER:: 50 is a dummy number
-					        		name + //NOTER:: take name out of unknownFun
-					        		//"<img src='images/newCloseWhite40.png' id='removeCat'/>" +
-					        		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
-					        		"</legend>" +
-					        		"<ul class='sortable'></ul></fieldset>");
-							dragged.attr("data-size-Row", 0);
-							dragged.attr("data-size-Col", 0);
-							dragged.attr("data-cur-row", -1);
-							dragged.attr("data-cur-col", -1);
-							dragged.css({
-								"height": "30px",
-								"width" : "210px",
-								"margin" : "auto",
-								"font-size" : "18px",
-							});
-							dragged.draggable({
-								revert: "invalid",
-								start: function(e,ui){
-									
-								}
-							});
-							dragged.onClick(function(){
-//NOTER:: DO THIS NEXT								
-							});
-							$(this).append(dragged);
-							$("#mouseFollow").empty();
-							$(this).attr("data-isOccupied", "true");
-						}*/
-					});
+					var cell = new Cell(rowIndex, colIndex);
 					$("#grid").append(cell);
-				}}
+				}
+			}
 			
 		},	
 		sizer : function(sizeRow, sizeCol, elm, action){
@@ -182,6 +132,62 @@ $(document).ready(function() {
 			});
 		}
 	};
+	function Cell(rowIndex, colIndex){
+		this.rowIndex = rowIndex;
+		this.colIndex = colIndex;
+		var cell = $("<div>", {class: "gridded"});
+		cell.css({"width": "20%",
+			"height": "8.3%",
+			"position": "absolute",
+			"top" : rowIndex*8.3+"%",
+			"left" : colIndex*20+"%",
+			"background-color": "", 
+			"border": "2px solid #FFFFFF"});
+		var elmName = "col"+colIndex+"row"+rowIndex;
+		cell.attr("data-id", elmName);
+		cell.attr("data-col", colIndex);
+		cell.attr("data-row", rowIndex);
+		cell.attr("data-isOccupied", false);
+		cell.on("click", function(){
+			if ($("#mouseFollow").css('opacity') != 0){
+				var name = $("#mouseFollow").attr("data-name");s
+			}
+			/*
+			if (cell.attr("data-isOccupied")==false){
+				
+				var dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
+						100 + "px;'>" + //NOTER:: 50 is a dummy number
+		        		name + //NOTER:: take name out of unknownFun
+		        		//"<img src='images/newCloseWhite40.png' id='removeCat'/>" +
+		        		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
+		        		"</legend>" +
+		        		"<ul class='sortable'></ul></fieldset>");
+				dragged.attr("data-size-Row", 0);
+				dragged.attr("data-size-Col", 0);
+				dragged.attr("data-cur-row", -1);
+				dragged.attr("data-cur-col", -1);
+				dragged.css({
+					"height": "30px",
+					"width" : "210px",
+					"margin" : "auto",
+					"font-size" : "18px",
+				});
+				dragged.draggable({
+					revert: "invalid",
+					start: function(e,ui){
+						
+					}
+				});
+				dragged.onClick(function(){
+//NOTER:: DO THIS NEXT								
+				});
+				$(this).append(dragged);
+				$("#mouseFollow").empty();
+				$(this).attr("data-isOccupied", "true");
+			}*/
+		});
+		return cell;
+	}
 	grid.init();
 	grid.dropInit();
 });
