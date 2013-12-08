@@ -21,3 +21,10 @@ body{
     font-size: 20px;
     text-align: left;
 }
+#mouseFollow{
+	height:16px;
+	width:16px;
+	position:absolute;
+	opacity:0;
+	z-index:10000;
+}
