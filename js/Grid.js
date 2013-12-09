@@ -55,10 +55,8 @@ $(document).ready(function() {
 		colSize = 1;
 		this.url = url;
 		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
-				100 + "px;'>" + //NOTER:: 50 is a dummy number
-        		"name" + //NOTER:: take name out of unknownFun
-        		//"<img src='images/newCloseWhite40.png' id='removeCat'/>" +
-        		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
+				100 + "px;'>" +
+        		"name" +
         		"</legend>" +
         		"<ul class='sortable'></ul></fieldset>");
 		cat.attr("data-size-Row", rowSize);
