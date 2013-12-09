@@ -14,8 +14,11 @@ $(document).ready(function() {
 		
 		dropInit: function(){
 			$(".gridded").droppable({
+	 			tolerance: "pointer",
+				
 		 		drop: function(e,ui){
 		 			var dragged = ui.helper;
+		 			
 		 			if ($(this).attr("data-isOccupied")=='false'){
 		 				dragged.css({
 							"top" : "0px",
@@ -79,8 +82,8 @@ $(document).ready(function() {
 		
 		cat.draggable({
 			revert: "invalid",
+			cursorAt: {top:20},
 			start: function(e,ui){
-				
 			}
 		});
 		
@@ -105,8 +108,6 @@ $(document).ready(function() {
 	//NOTER:: Sizing of internal elements?
 	function Link(name, rowSize, colSize){
 		this.name = name;
-
-		alert (rowSize);
 		
 		colSize = 90 / colSize;
 		rowSize = 30 / rowSize;
