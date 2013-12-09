@@ -104,3 +104,10 @@ $(document).bind('mousemove', function(e){
 	       top:   e.pageY + 11
 	    });
 });
+
+//Fix for the scrolling when the div is dragged off the edge
+//NOTER:: fix the jerkiness of it
+$(document).on('scroll', function() {
+	  $(document).scrollLeft(0);
+	  $(document).scrollTop(0);
+});
