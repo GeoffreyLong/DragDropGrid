@@ -1,6 +1,10 @@
 $(document).ready(function(){	
 	
 });
+//NOTER:: this is mostly irrelevant right now...Most of this logic is 
+//in the grid class
+
+
 	/*
 	function createObj(height, width, background, top, left, isDrag, id, className){
 		this.height = height;
