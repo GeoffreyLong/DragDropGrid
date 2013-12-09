@@ -65,6 +65,7 @@ $(document).ready(function() {
 		cat.attr("data-size-Col", colSize);
 		cat.attr("data-cur-row", rowIndex);
 		cat.attr("data-cur-col", colIndex);
+		
 		cat.css({
 			"width": "85%",
 			"height": "60%",
@@ -77,24 +78,56 @@ $(document).ready(function() {
 			"margin" : "auto",
 			"padding" : "5px",
 		});
+		
 		cat.draggable({
 			revert: "invalid",
 			start: function(e,ui){
 				
 			}
 		});
-		/*
-		cat.onClick(function(){
-//NOTER:: DO THIS NEXT								
-		});*/
+		
+		cat.on("click", function(e){
+			if ($("#mouseFollow").css('opacity') != 0){
+				var name = $("#mouseFollow").attr("data-name");
+				$("#mouseFollow").css('opacity','0');
+				$("#mouseFollow").attr("data-name", "");
+				//NOTER:: may want to do this instead
+				//$("#mouseFollow").empty();
+				var link = new Link(name, rowSize, colSize);
+				$(cat).append(link);
+				rowSize += 1;
+				height = 60 + 100 * (rowSize-1);
+				$(cat).css({"height" : height+"%"});
+			}
+		});
+
 		return cat;
+	}
+	
+	//NOTER:: Sizing of internal elements?
+	function Link(name, rowSize, colSize){
+		this.name = name;
+		
+		alert(colSize, rowSize);
+		
+		colSize = 90 / colSize;
+		rowSize = 30 / rowSize;
+		
+		var link = $("<div>", {class: "link"});
+		link.css({
+			"height" : rowSize + "%",
+			"width" : colSize + "%",
+			"margin" : "3px",
+			"background-color": "#019001",
+			"z-index" : "3",
+		});
+		return link;
 	}
 	
 	function Cell(rowIndex, colIndex, isEmpty){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
 		isEmpty = true;
-		var cat = null;
 		var cell = $("<div>", {class: "gridded"});
 		cell.css({"width": "20%",
 			"height": "8.3%",
@@ -113,7 +146,7 @@ $(document).ready(function() {
 				$("#mouseFollow").attr("data-name", "");
 				//NOTER:: may want to do this instead
 				//$("#mouseFollow").empty();
-				cat = new Cat(rowIndex, colIndex, name);
+				var cat = new Cat(rowIndex, colIndex, name);
 				$(cell).append(cat);
 				cell.attr("data-isOccupied", true);
 				isEmpty = false;
