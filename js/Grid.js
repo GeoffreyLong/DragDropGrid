@@ -10,38 +10,6 @@ $(document).ready(function() {
 				}
 			}
 			
-		},	
-		sizer : function(sizeRow, sizeCol, elm, action){
-			switch(action){
-			case action = 0: 
-				for (var i=0; i<=sizeCol; i++){
-					$('[data-col = '+(elm.data("col")+i)+'][data-row = '+(elm.data("row"))+']').attr("data-isOccupied",'true');
-				}
-				for (var i=0; i<=sizeRow; i++){
-					$('[data-row = '+(elm.data("row")+i)+'][data-col = '+(elm.data("col"))+']').attr("data-isOccupied",'true');
-				}
-			case action = 1: 
-				for (var i=0; i<=sizeCol; i++){
-//NOTER:: question of interest, why did elm.data("col") not work here?					
-					var dropper = $('[data-col = '+(grid.dropOut.data("col")+i)+'][data-row = '+(grid.dropOut.data("row"))+']');
-				}
-				for (var i=0; i<=sizeRow; i++){
-					$('[data-row = '+(grid.dropOut.data("row")+i)+'][data-col = '+(grid.dropOut.data("col"))+']').attr("data-isOccupied",'false');
-				}
-			case action = 2: 
-				var isOccupied = false;
-				for (var i=0; i<=sizeCol; i++){
-					if ($('[data-col = '+(elm.data("col")+i)+'][data-row = '+(elm.data("row"))+']').attr("data-isOccupied",'true')){
-						isOccupied = true;
-					}
-				}
-				for (var i=0; i<=sizeRow; i++){
-					if ($('[data-row = '+(elm.data("row")+i)+'][data-col = '+(elm.data("col"))+']').attr("data-isOccupied",'true')){
-						isOccupied = true;
-					}
-				}
-				return isOccupied;
-			}
 		},
 		dropOut : $(),
 		lastBlock : $(),
@@ -49,61 +17,14 @@ $(document).ready(function() {
 			$(".gridded").droppable({
 		 		drop: function(e,ui){
 		 			var dragged = ui.helper;
-					if (dragged.hasClass("unknownFun")){
-						dragged.remove();
-						$(".unknownFun").remove();
-						dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
-						100 + "px;'>" + //NOTER:: 50 is a dummy number
-		        		"name" + //NOTER:: take name out of unknownFun
-		        		//"<img src='images/newCloseWhite40.png' id='removeCat'/>" +
-		        		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
-		        		"</legend>" +
-		        		"<ul class='sortable'></ul></fieldset>");
-						dragged.attr("data-size-Row", 0);
-						dragged.attr("data-size-Col", 0);
-						dragged.attr("data-cur-row", -1);
-						dragged.attr("data-cur-col", -1);
-						dragged.css({
-							"height": "30px",
-							"width" : "210px",
-							"margin" : "auto",
-							"font-size" : "18px",
-						});
-						dragged.droppable({
-							accept: function(e,ui){
-								
-							},
-							drop: function(e,ui){
-								alert("hello");
-								var linkDragged = ui.helper;
-								linkDragged.remove();
-								linkDragged = $("<li class='link'><a class='uurl' target ='_blank' href='" + name +
-										  "' >" + name + "</a>" +
-										  //"<img src='images/close.png' id='removeLink'/>" +
-										  //"<img src='images/toolBoxOne.png' id='linkToolBox'>" +
-										  "</li>");
-								$(this).append(linkDragged);
-								//$(this).attr("data-size-row", $(this).attr("data-size-row")+1);
-								//$(this).attr("data-size-col", $(this).attr("data-size-col")+1);
-							},
-						});
-						dragged.draggable({
-							revert: "invalid",
-							start: function(e,ui){
-								
-							}
-						});
-					}
 		 			if ($(this).attr("data-isOccupied")=='false'){
 		 				dragged.css({
 							"top" : "0px",
 							"left": "0px",
 						});
 			 			$(this).append(dragged);
-			 			grid.sizer(dragged.data("sizeRow"), dragged.data("sizeCol"), grid.dropOut, 1);
 			 			dragged.attr("data-cur-col", $(this).attr("data-col"));
 			 			dragged.attr("data-cur-row", $(this).attr("data-row"));
-			 			grid.sizer(dragged.data("sizeRow"), dragged.data("sizeCol"), $(this), 0);
 			 			grid.dropOut = $(this);
 			 			grid.lastBlock.attr("data-isOccupied", "false");
 		 			}
@@ -136,6 +57,8 @@ $(document).ready(function() {
 	function Cat(rowIndex, colIndex, url){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
+		rowSize = 1;
+		colSize = 1;
 		this.url = url;
 		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
 				100 + "px;'>" + //NOTER:: 50 is a dummy number
@@ -144,10 +67,10 @@ $(document).ready(function() {
         		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
         		"</legend>" +
         		"<ul class='sortable'></ul></fieldset>");
-		cat.attr("data-size-Row", 0);
-		cat.attr("data-size-Col", 0);
-		cat.attr("data-cur-row", -1);
-		cat.attr("data-cur-col", -1);
+		cat.attr("data-size-Row", rowSize);
+		cat.attr("data-size-Col", colSize);
+		cat.attr("data-cur-row", rowIndex);
+		cat.attr("data-cur-col", colIndex);
 		cat.css({
 			"width": "85%",
 			"height": "60%",
@@ -198,10 +121,14 @@ $(document).ready(function() {
 				//$("#mouseFollow").empty();
 				cat = new Cat(rowIndex, colIndex, name);
 				$(cell).append(cat);
+				cell.attr("data-isOccupied", true);
+				isEmpty = false;
 			}
 		});
 		return cell;
 	}
+	
+	
 	grid.init();
 	grid.dropInit();
 });
