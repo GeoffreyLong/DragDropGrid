@@ -137,13 +137,39 @@ $(document).ready(function() {
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
 		this.url = url;
-		var cat = $("<div>", {class: "cat"});
+		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
+				100 + "px;'>" + //NOTER:: 50 is a dummy number
+        		"name" + //NOTER:: take name out of unknownFun
+        		//"<img src='images/newCloseWhite40.png' id='removeCat'/>" +
+        		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
+        		"</legend>" +
+        		"<ul class='sortable'></ul></fieldset>");
+		cat.attr("data-size-Row", 0);
+		cat.attr("data-size-Col", 0);
+		cat.attr("data-cur-row", -1);
+		cat.attr("data-cur-col", -1);
 		cat.css({
-			"width": "100%",
-			"height": "100%",
+			"width": "85%",
+			"height": "60%",
 			"background-color": "#123456",
 			"z-index":"2",
+			"font-size" : "18px",
+			"border-radius" : "5px",
+			"color" : "#FFFFFF",
+			"border" : "2px solid #FFFFFF",
+			"margin" : "auto",
+			"padding" : "5px",
 		});
+		cat.draggable({
+			revert: "invalid",
+			start: function(e,ui){
+				
+			}
+		});
+		/*
+		cat.onClick(function(){
+//NOTER:: DO THIS NEXT								
+		});*/
 		return cat;
 	}
 	
@@ -168,42 +194,11 @@ $(document).ready(function() {
 				var name = $("#mouseFollow").attr("data-name");
 				$("#mouseFollow").css('opacity','0');
 				$("#mouseFollow").attr("data-name", "");
+				//NOTER:: may want to do this instead
+				//$("#mouseFollow").empty();
 				cat = new Cat(rowIndex, colIndex, name);
 				$(cell).append(cat);
 			}
-			/*
-			if (cell.attr("data-isOccupied")==false){
-				
-				var dragged = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
-						100 + "px;'>" + //NOTER:: 50 is a dummy number
-		        		name + //NOTER:: take name out of unknownFun
-		        		//"<img src='images/newCloseWhite40.png' id='removeCat'/>" +
-		        		//"<img src='images/newPlusWhite.png' id='addLinkNew' class='ctl'/>" +
-		        		"</legend>" +
-		        		"<ul class='sortable'></ul></fieldset>");
-				dragged.attr("data-size-Row", 0);
-				dragged.attr("data-size-Col", 0);
-				dragged.attr("data-cur-row", -1);
-				dragged.attr("data-cur-col", -1);
-				dragged.css({
-					"height": "30px",
-					"width" : "210px",
-					"margin" : "auto",
-					"font-size" : "18px",
-				});
-				dragged.draggable({
-					revert: "invalid",
-					start: function(e,ui){
-						
-					}
-				});
-				dragged.onClick(function(){
-//NOTER:: DO THIS NEXT								
-				});
-				$(this).append(dragged);
-				$("#mouseFollow").empty();
-				$(this).attr("data-isOccupied", "true");
-			}*/
 		});
 		return cell;
 	}
