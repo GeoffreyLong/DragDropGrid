@@ -133,11 +133,25 @@ $(document).ready(function() {
 		}
 	};
 	
+	function Cat(rowIndex, colIndex, url){
+		this.rowIndex = rowIndex;
+		this.colIndex = colIndex;
+		this.url = url;
+		var cat = $("<div>", {class: "cat"});
+		cat.css({
+			"width": "100%",
+			"height": "100%",
+			"background-color": "#123456",
+			"z-index":"2",
+		});
+		return cat;
+	}
 	
 	function Cell(rowIndex, colIndex, isEmpty){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
 		isEmpty = true;
+		var cat = null;
 		var cell = $("<div>", {class: "gridded"});
 		cell.css({"width": "20%",
 			"height": "8.3%",
@@ -146,8 +160,6 @@ $(document).ready(function() {
 			"left" : colIndex*20+"%",
 			"background-color": "", 
 			"border": "2px solid #FFFFFF"});
-		var elmName = "col"+colIndex+"row"+rowIndex;
-		cell.attr("data-id", elmName);
 		cell.attr("data-col", colIndex);
 		cell.attr("data-row", rowIndex);
 		cell.attr("data-isOccupied", false);
@@ -156,7 +168,8 @@ $(document).ready(function() {
 				var name = $("#mouseFollow").attr("data-name");
 				$("#mouseFollow").css('opacity','0');
 				$("#mouseFollow").attr("data-name", "");
-				alert(name);
+				cat = new Cat(rowIndex, colIndex, name);
+				$(cell).append(cat);
 			}
 			/*
 			if (cell.attr("data-isOccupied")==false){
