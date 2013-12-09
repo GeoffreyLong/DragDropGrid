@@ -48,11 +48,11 @@ $(document).ready(function() {
 	};
 	
 	
-	function Cat(rowIndex, colIndex, url){
+	function Cat(rowIndex, colIndex, rowSize, colSize, url){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
-		rowSize = 1;
-		colSize = 1;
+		this.rowSize = rowSize;
+		this.colSize = colSize;
 		this.url = url;
 		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
 				100 + "px;'>" +
@@ -105,8 +105,8 @@ $(document).ready(function() {
 	//NOTER:: Sizing of internal elements?
 	function Link(name, rowSize, colSize){
 		this.name = name;
-		
-		alert(colSize, rowSize);
+
+		alert (rowSize);
 		
 		colSize = 90 / colSize;
 		rowSize = 30 / rowSize;
@@ -144,7 +144,7 @@ $(document).ready(function() {
 				$("#mouseFollow").attr("data-name", "");
 				//NOTER:: may want to do this instead
 				//$("#mouseFollow").empty();
-				var cat = new Cat(rowIndex, colIndex, name);
+				var cat = new Cat(rowIndex, colIndex, 1, 1, name);
 				$(cell).append(cat);
 				cell.attr("data-isOccupied", true);
 				isEmpty = false;
