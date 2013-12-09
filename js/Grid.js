@@ -22,11 +22,13 @@ $(document).ready(function() {
 							"top" : "0px",
 							"left": "0px",
 						});
-			 			$(this).append(dragged);
+			 			$('.gridded[data-row="'+dragged.attr("data-cur-row")+'"]'+
+			 				'[data-col="'+dragged.attr("data-cur-col")+'"]').attr("data-isOccupied", "false");
 			 			dragged.attr("data-cur-col", $(this).attr("data-col"));
 			 			dragged.attr("data-cur-row", $(this).attr("data-row"));
-			 			grid.dropOut = $(this);
-			 			grid.lastBlock.attr("data-isOccupied", "false");
+			 			
+			 			$(this).append(dragged);
+			 			$(this).attr("data-isOccupied", "true");
 		 			}
 		 			else{
 //For some reason this returns a new object
@@ -40,7 +42,6 @@ $(document).ready(function() {
 		 				grid.lastBlock = $('[data-col = '+(dragged.attr("data-cur-Col"))+'][data-row = '+(dragged.attr("data-cur-Row"))+']');
 		 				grid.lastBlock.append(dragged);
 		 				grid.lastBlock.attr("data-isOccupied", "true");
-		 				//grid.sizer(dragged.data("sizeRow"), dragged.data("sizeCol"), lastBlock, 0);
 		 				dragged.css({
 							"top" : "0px",
 							"left": "0px",
