@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	var grid = {
+			
 		init: function(){
 			var rowIndex = 0;
 			var colIndex = 0;
@@ -8,10 +9,9 @@ $(document).ready(function() {
 					var cell = new Cell(rowIndex, colIndex);
 					$("#grid").append(cell);
 				}
-			}
-			
+			}	
 		},
-		dropOut : $(),
+		
 		dropInit: function(){
 			$(".gridded").droppable({
 		 		drop: function(e,ui){
@@ -46,6 +46,7 @@ $(document).ready(function() {
 			});
 		}
 	};
+	
 	
 	function Cat(rowIndex, colIndex, url){
 		this.rowIndex = rowIndex;
