@@ -12,7 +12,6 @@ $(document).ready(function() {
 			
 		},
 		dropOut : $(),
-		lastBlock : $(),
 		dropInit: function(){
 			$(".gridded").droppable({
 		 		drop: function(e,ui){
@@ -31,17 +30,10 @@ $(document).ready(function() {
 			 			$(this).attr("data-isOccupied", "true");
 		 			}
 		 			else{
-//For some reason this returns a new object
-//When first run with var lastBlock = ... I wouldn't be able 
-//to reset that block on drop cause it is different than $(this) in drop
-//If this is found out please tell me why it is!!!  It's really bothering me
-		 				
-//Might be because I don't do the .droppable in the same method as they are declared
-		 				
-//NOTER :: may have to do a switch case for this for larger items
-		 				grid.lastBlock = $('[data-col = '+(dragged.attr("data-cur-Col"))+'][data-row = '+(dragged.attr("data-cur-Row"))+']');
-		 				grid.lastBlock.append(dragged);
-		 				grid.lastBlock.attr("data-isOccupied", "true");
+		 				var lastBlock = $('.gridded[data-col = '+(dragged.attr("data-cur-Col"))+']'+
+		 						'[data-row = '+(dragged.attr("data-cur-Row"))+']');
+		 				lastBlock.append(dragged);
+		 				lastBlock.attr("data-isOccupied", "true");
 		 				dragged.css({
 							"top" : "0px",
 							"left": "0px",
