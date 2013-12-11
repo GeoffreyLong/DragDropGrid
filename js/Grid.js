@@ -50,6 +50,35 @@ $(document).ready(function() {
 		}
 	};
 	
+	/*
+	 * why doesn't this work? gridSizing.bodyHeight never changes from 0
+	 * 
+	var gridSizing = {
+		bodyHeight : 0,
+		bodyWidth : 0,
+		cellHeight : 0,
+		cellWidth : 0,
+		
+		calibrate : function(){
+			bodyHeight = $("body").height();
+			bodyWidth = $("body").width();
+			cellHeight = bodyHeight * .2;
+			cellWidth = bodyWidth * .083;
+			alert(bodyHeight);
+		},
+	};
+	gridSizing.calibrate();
+	alert(gridSizing.bodyHeight);
+	*/
+	
+	var gridSizing = {
+		calibrate : function(){
+			$(".link").css({
+				"height" : $(".gridded").height()*.5,
+				//"width" : $(".gridded").width(),
+			});
+		}
+	};
 	
 	function Cat(rowIndex, colIndex, rowSize, colSize, url){
 		this.rowIndex = rowIndex;
@@ -94,11 +123,14 @@ $(document).ready(function() {
 				$("#mouseFollow").attr("data-name", "");
 				//NOTER:: may want to do this instead
 				//$("#mouseFollow").empty();
+
 				var link = new Link(name, rowSize, colSize);
 				$(cat).append(link);
+				gridSizing.calibrate();
+				
 				rowSize += 1;
-				height = 60 + 100 * (rowSize-1);
-				$(cat).css({"height" : height+"%"});
+                height = 60 + 100 * (rowSize-1);
+                $(cat).css({"height" : height+"%"});
 			}
 		});
 
@@ -114,8 +146,7 @@ $(document).ready(function() {
 		
 		var link = $("<div>", {class: "link"});
 		link.css({
-			"height" : rowSize + "%",
-			"width" : colSize + "%",
+			"width" : "90%",
 			"margin" : "3px",
 			"background-color": "#019001",
 			"z-index" : "3",
