@@ -74,7 +74,7 @@ $(document).ready(function() {
 	var gridSizing = {
 		calibrate : function(){
 			$(".link").css({
-				"height" : $(".gridded").height()*.5,
+				"height" : $(".gridded").height()*.85,
 				//"width" : $(".gridded").width(),
 			});
 		}
@@ -146,7 +146,7 @@ $(document).ready(function() {
 		
 		var link = $("<div>", {class: "link"});
 		link.css({
-			"width" : "90%",
+			"width" : "95%",
 			"margin" : "3px",
 			"background-color": "#019001",
 			"z-index" : "3",
