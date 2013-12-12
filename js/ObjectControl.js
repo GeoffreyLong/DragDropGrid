@@ -17,14 +17,12 @@ $(document).ready(function(){
 				});
 					
 				$(document).keydown(function(e){
-					console.log(e.which);
-					  if (e.ctrlKey) {
-						  $("#catName").focus();
+					  if (e.ctrlKey && !isForm) {
+						  $("#catHidden").focus();
 						  if(e.keyCode == 86){
 							  $(":focus").each(function() {
-								    if (this.id == "catName"){
-								    	ctrlControl.newLink($("#catName").val());
-								    	isForm = false;
+								    if (this.id == "catHidden"){
+								    	ctrlControl.newLink($("#catHidden").val());
 								    }
 							  });
 						  }
@@ -49,6 +47,7 @@ $(document).ready(function(){
 			newLink: function(name){
 				$("#catForm").fadeOut().delay(400).queue(function(n) {
 					$("#catName").val("");
+					//This either...I will figure it out later I guess...
 				    n();
 				});
 				$('#mouseFollow').empty();
