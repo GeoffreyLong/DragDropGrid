@@ -52,29 +52,6 @@ $(document).ready(function(){
 					$("#catName").val("");
 				    n();
 				});
-				/*var $element = $("<div class= 'unknownFun'> ==NAME== </div>");
-				$element.css({
-					"height": 15,
-					"width":170,
-					"position":"absolute",
-					"top": 0,
-					"left": 0,
-					"padding": "10px",
-				    "font-size": "18px",
-					"text-align": "center",
-					"background": "rgba(0,0,0,0)",
-				});
-				$element.draggable({
-					revert: "invalid",
-					start: function(e,ui){
-						
-					}
-				});
-				$element.attr("data-size-Row", 0);
-				$element.attr("data-size-Col", 0);
-				$element.attr("data-cur-row", -1);
-				$element.attr("data-cur-col", -1);
-				$(".da-slide").append($element);*/
 				$('#mouseFollow').empty();
 				$('#mouseFollow').css({
 					opacity: 1,
