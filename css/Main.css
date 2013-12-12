@@ -44,3 +44,8 @@ body{
 	padding-bottom:0;
 	margin:0;
 }
+#catHidden{
+	position:absolute;
+	top:200%;
+	opacity:0;
+}
