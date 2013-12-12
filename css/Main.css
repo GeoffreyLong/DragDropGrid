@@ -35,3 +35,12 @@ body{
 	width:98%;
 	background: rgba(0,0,0,0.3);
 }
+.object{
+	padding-top:0;
+	margin:0;
+}
+.fieldLeg{
+	padding-top:0;
+	padding-bottom:0;
+	margin:0;
+}

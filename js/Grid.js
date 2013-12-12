@@ -77,8 +77,22 @@ $(document).ready(function() {
 				"height" : $(".gridded").height()*.85,
 				//"width" : $(".gridded").width(),
 			});
+			//Standard height, for which the body font size is correct
+			
+			var preferredHeight = 768;  
+
+			var displayHeight = $(window).height();
+			var percentage = displayHeight / preferredHeight;
+			var newFontSize = Math.floor(30 * percentage) - 1;
+			$(".object").css("font-size", newFontSize);
 		}
 	};
+	
+	gridSizing.calibrate();
+	
+    $(window).bind('resize', function(){
+    	gridSizing.calibrate();
+    }).trigger('resize');
 	
 	function Cat(rowIndex, colIndex, rowSize, colSize, url){
 		this.rowIndex = rowIndex;
@@ -87,10 +101,10 @@ $(document).ready(function() {
 		this.colSize = colSize;
 		this.url = url;
 		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
-				100 + "px;'>" +
+				100 + "px; padding-top:0; padding-bottom:0;margin:0;'>" +
         		"name" +
         		"</legend>" +
-        		"<ul class='sortable'></ul></fieldset>");
+        		"</fieldset>");
 		cat.attr("data-size-Row", rowSize);
 		cat.attr("data-size-Col", colSize);
 		cat.attr("data-cur-row", rowIndex);
@@ -101,7 +115,6 @@ $(document).ready(function() {
 			"height": "60%",
 			"background-color": "#123456",
 			"z-index":"2",
-			"font-size" : "18px",
 			"border-radius" : "5px",
 			"color" : "#FFFFFF",
 			"border" : "2px solid #FFFFFF",
@@ -126,11 +139,13 @@ $(document).ready(function() {
 
 				var link = new Link(name, rowSize, colSize);
 				$(cat).append(link);
-				gridSizing.calibrate();
 				
 				rowSize += 1;
                 height = 60 + 100 * (rowSize-1);
-                $(cat).css({"height" : height+"%"});
+                $(cat).css({
+                	"height" : height+"%",
+                	"padding-top" : "0",
+                });
 			}
 		});
 
@@ -147,6 +162,7 @@ $(document).ready(function() {
 		var link = $("<div>", {class: "link"});
 		link.css({
 			"width" : "95%",
+			"height" : $(".gridded").height()*.85,
 			"margin" : "3px",
 			"background-color": "#019001",
 			"z-index" : "3",
@@ -178,6 +194,7 @@ $(document).ready(function() {
 				//$("#mouseFollow").empty();
 				var cat = new Cat(rowIndex, colIndex, 1, 1, name);
 				$(cell).append(cat);
+				gridSizing.calibrate();
 				cell.attr("data-isOccupied", true);
 				isEmpty = false;
 			}
