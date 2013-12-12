@@ -2,7 +2,8 @@ $(document).ready(function(){
 	
 	var ctrlControl = {
 			start : function(){
-				var needCtrl = true;
+				var isForm = false;
+				
 				var catFormOpen = (function(e){
 					$("#catForm").fadeIn();
 					$("#catName").focus();
@@ -10,39 +11,37 @@ $(document).ready(function(){
 				var catFormClose = (function(){
 					$("#catForm").fadeOut(400).delay(400).queue(function(n) {
 						$("#catName").val("");
+						//I don't know what this does...
 					    n();
 					});
 				});
 					
 				$(document).keydown(function(e){
+					console.log(e.which);
 					  if (e.ctrlKey) {
-						  catFormOpen();
-						  if (e.keyCode != 86 && e.keyCode != 16){
-							  e.preventDefault();
+						  $("#catName").focus();
+						  if(e.keyCode == 86){
+							  $(":focus").each(function() {
+								    if (this.id == "catName"){
+								    	ctrlControl.newLink($("#catName").val());
+								    	isForm = false;
+								    }
+							  });
 						  }
 						  if (e.keyCode == 16) {
-							  if (needCtrl){
-								  needCtrl = false;
-							  }
-							  else{
-								  needCtrl = true;
-							  }
+							  catFormOpen();
+							  isForm = true;
 						  }
 					  }
-					  if (e.keyCode == 13){
+					  if (e.keyCode == 13 && isForm){
 						  $(":focus").each(function() {
 							    if (this.id == "catName"){
 							    	ctrlControl.newLink($("#catName").val());
+							    	isForm = false;
 							    }
 						  });
 					  }
 				});
-				
-				$(document).keyup(function(e){
-					if (e.which == 17 && needCtrl){
-						catFormClose();
-					}
-				});	
 			},
 			
 			
