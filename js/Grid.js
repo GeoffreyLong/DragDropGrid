@@ -19,37 +19,80 @@ $(document).ready(function() {
 		 		drop: function(e,ui){
 		 			var dragged = ui.helper;
 		 			
-		 			if ($(this).attr("data-isOccupied")=='false'){
+		 			if (grid.checkArea($(this), dragged)){
 		 				dragged.css({
 							"top" : "0px",
 							"left": "0px",
 						});
-			 			$('.gridded[data-row="'+dragged.attr("data-cur-row")+'"]'+
-			 				'[data-col="'+dragged.attr("data-cur-col")+'"]').attr("data-isOccupied", "false");
+
+			 			grid.changeArea(dragged, false);
+			 			
 			 			dragged.attr("data-cur-col", $(this).attr("data-col"));
 			 			dragged.attr("data-cur-row", $(this).attr("data-row"));
 			 			
+			 			grid.changeArea(dragged, true);
+			 			
 			 			$(this).append(dragged);
-			 			$(this).attr("data-isOccupied", "true");
 		 			}
 		 			else{
 		 				var lastBlock = $('.gridded[data-col = '+(dragged.attr("data-cur-Col"))+']'+
 		 						'[data-row = '+(dragged.attr("data-cur-Row"))+']');
 		 				lastBlock.append(dragged);
-		 				lastBlock.attr("data-isOccupied", "true");
+		 				grid.changeArea(dragged, true);
 		 				dragged.css({
 							"top" : "0px",
 							"left": "0px",
 						});
 		 			}
 		  		},
+		  		out: function(e, ui){
+		  			var dragged = ui.helper;
+		 			grid.changeArea(dragged, false);
+		  		},
 				accept: function (e) {
 					return true;
 			    },
 			});
-		}
+		},
+		checkArea : function(cell, element){
+			var lastCellRow = parseInt(cell.attr("data-row"));
+			var rowSize = parseInt(element.attr("data-size-row"));
+			var lastCellCol = parseInt(cell.attr("data-col"));
+			var colSize = parseInt(element.attr("data-size-col"));
+			
+			var isEmpty = true;
+			
+			//TODO add a check for out of bounds
+			
+			for (var i = lastCellRow; i<lastCellRow+rowSize; i++){
+				for (var j = lastCellCol; j<lastCellCol+colSize; j++){
+					var cell = $('.gridded[data-row="'+ i +'"]'+
+			 				'[data-col="'+ j +'"]');
+					if (cell.attr("data-isOccupied")=='true'){
+						isEmpty = false;
+					}
+				}
+			}
+			return isEmpty;
+		},
+		changeArea : function(element, isFull){
+			var cellRow = parseInt(element.attr("data-cur-row"));
+			var cellCol = parseInt(element.attr("data-cur-col"));
+			var rowSize = parseInt(element.attr("data-size-row"));
+			var colSize = parseInt(element.attr("data-size-col"));
+			
+			console.log(cellRow+rowSize);
+			
+			for (var i = cellRow; i<cellRow+rowSize; i++){
+				for (var j = cellCol; j<cellCol+colSize; j++){
+					var cell = $('.gridded[data-row="'+ i +'"]'+
+			 				'[data-col="'+ j +'"]');
+					cell.attr("data-isOccupied", isFull);
+				}
+			}
+		},
 	};
-	
+
 	/*
 	 * why doesn't this work? gridSizing.bodyHeight never changes from 0
 	 * 
@@ -141,6 +184,10 @@ $(document).ready(function() {
 				$(cat).append(link);
 				
 				rowSize += 1;
+				
+				cat.attr("data-size-Row", rowSize);
+				cat.attr("data-size-Col", colSize);
+				
                 height = 60 + 100 * (rowSize-1);
                 $(cat).css({
                 	"height" : height+"%",
@@ -163,7 +210,7 @@ $(document).ready(function() {
 		link.css({
 			"width" : "95%",
 			"height" : $(".gridded").height()*.85,
-			"margin" : "3px",
+			"margin" : "5px",
 			"background-color": "#019001",
 			"z-index" : "3",
 		});
