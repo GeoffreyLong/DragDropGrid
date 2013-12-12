@@ -80,9 +80,7 @@ $(document).ready(function() {
 			var cellCol = parseInt(element.attr("data-cur-col"));
 			var rowSize = parseInt(element.attr("data-size-row"));
 			var colSize = parseInt(element.attr("data-size-col"));
-			
-			console.log(cellRow+rowSize);
-			
+
 			for (var i = cellRow; i<cellRow+rowSize; i++){
 				for (var j = cellCol; j<cellCol+colSize; j++){
 					var cell = $('.gridded[data-row="'+ i +'"]'+
@@ -169,7 +167,15 @@ $(document).ready(function() {
 			revert: "invalid",
 			cursorAt: {top:20},
 			start: function(e,ui){
-			}
+				$(this).css({
+					"z-index" : "20",
+				});
+			},
+			stop: function(e,ui){
+				$(this).css({
+					"z-index" : "2",
+				});
+			},
 		});
 		
 		cat.on("click", function(e){
