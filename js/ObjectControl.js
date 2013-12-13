@@ -23,6 +23,7 @@ $(document).ready(function(){
 							  $(":focus").each(function() {
 								    if (this.id == "catHidden"){
 								    	ctrlControl.newLink($("#catHidden").val());
+								    	$("#catHidden").val("");
 								    }
 							  });
 						  }
