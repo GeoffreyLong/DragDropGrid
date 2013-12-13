@@ -114,8 +114,11 @@ $(document).ready(function() {
 	
 	var gridSizing = {
 		calibrate : function(){
+			var gridHeight = $(".gridded").height();
+			var gridWidth = $(".gridded").width();
+			
 			$(".link").css({
-				"height" : $(".gridded").height()*.85,
+				"height" : gridHeight*.85,
 				//"width" : $(".gridded").width(),
 			});
 			//Standard height, for which the body font size is correct
@@ -126,6 +129,8 @@ $(document).ready(function() {
 			var percentage = displayHeight / preferredHeight;
 			var newFontSize = Math.floor(30 * percentage) - 1;
 			$(".object").css("font-size", newFontSize);
+			
+			$(".object").resizable("option", "grid", [gridWidth, gridHeight]);
 		}
 	};
 	
@@ -177,6 +182,8 @@ $(document).ready(function() {
 				});
 			},
 		});
+		
+		cat.resizable();
 		
 		cat.on("click", function(e){
 			if ($("#mouseFollow").css('opacity') != 0){
