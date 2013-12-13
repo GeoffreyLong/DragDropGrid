@@ -86,6 +86,23 @@ $(document).ready(function() {
 				}
 			}
 		},
+		
+		styleArea : function(element, cell, styling){
+			var cellRow = parseInt(cell.attr("data-Row"));
+			var cellCol = parseInt(cell.attr("data-Col"));
+			var rowSize = parseInt(element.attr("data-size-row"));
+			var colSize = parseInt(element.attr("data-size-col"));
+
+			for (var i = cellRow; i<cellRow+rowSize; i++){
+				for (var j = cellCol; j<cellCol+colSize; j++){
+					var cell = $('.gridded[data-row="'+ i +'"]'+
+			 				'[data-col="'+ j +'"]');
+					cell.css({
+						"background": styling,
+					});
+				}
+			}
+		},
 	};
 
 	/*
@@ -155,7 +172,7 @@ $(document).ready(function() {
 		
 		cat.draggable({
 			revert: "invalid",
-			cursorAt: {top:20},
+			cursorAt: {top:20, left:30},
 			start: function(e,ui){
 				$(this).css({
 					"z-index" : "20",
@@ -245,7 +262,7 @@ $(document).ready(function() {
 			"position": "absolute",
 			"top" : rowIndex*8.3+"%",
 			"left" : colIndex*20+"%",
-			"background-color": "", 
+			"background":"rgba(0,0,0,0.4)", 
 			"border": "2px solid #FFFFFF"});
 		cell.attr("data-col", colIndex);
 		cell.attr("data-row", rowIndex);
@@ -278,5 +295,20 @@ $(document).ready(function() {
 		else{
 			$(".object").draggable("disable");
 		}
+	});
+	
+	
+	$("#altView").on("click", function(){
+		$(".gridded").css({
+			"background":"rgba(0,0,0,0)",
+		});
+		$(".gridded").droppable({
+			over : function(e, ui){
+				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0.4)");
+			},
+			out : function(e, ui){
+				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0)");
+			}
+		});
 	});
 });

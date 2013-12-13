@@ -33,11 +33,6 @@ body{
 	left:1%;
 	height:90%;
 	width:98%;
-	background: rgba(0,0,0,0.3);
-}
-.object{
-	padding-top:0;
-	margin:0;
 }
 .fieldLeg{
 	padding-top:0;
@@ -50,6 +45,8 @@ body{
 	opacity:0;
 }
 .object{
+		padding-top:0;
+	margin:0;
 	width: 85%;
 	top:0;
 	left:4%;
@@ -58,7 +55,7 @@ body{
 	z-index:2;
 	border-radius : 5px;
 	color : #FFFFFF;
-	border : 2px solid #FFFFFF;
+	border : 2px solid #000000;
 	padding : 5px;
 }
 #freeze{
@@ -69,6 +66,15 @@ body{
 	width:7%;
 	height:4%;
 	background:#A9128A;
+}
+#altView{
+	cursor:pointer;
+	position:absolute;
+	top:.5%;
+	left:10%;
+	width:7%;
+	height:4%;
+	background:#A91200;
 }
 .ui-state-disabled { 
 	opacity:1; 
