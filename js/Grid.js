@@ -119,7 +119,7 @@ $(document).ready(function() {
 			
 			$(".link").css({
 				"height" : gridHeight*.85,
-				//"width" : $(".gridded").width(),
+				"width" : gridWidth*.80,
 			});
 			//Standard height, for which the body font size is correct
 			
@@ -229,7 +229,7 @@ $(document).ready(function() {
 		
 		var link = $("<div>", {class: "link"});
 		link.css({
-			"width" : "95%",
+			"width" : $(".gridded").width()*.80,
 			"height" : $(".gridded").height()*.85,
 			"margin" : "5px",
 			"background-color": "#019001",
