@@ -22,7 +22,7 @@ $(document).ready(function() {
 		 			if (grid.checkArea($(this), dragged)){
 		 				dragged.css({
 							"top" : "0px",
-							"left": "0px",
+							"left": "4%",
 						});
 
 			 			grid.changeArea(dragged, false);
@@ -41,7 +41,7 @@ $(document).ready(function() {
 		 				grid.changeArea(dragged, true);
 		 				dragged.css({
 							"top" : "0px",
-							"left": "0px",
+							"left": "4%",
 						});
 		 			}
 		  		},
@@ -156,18 +156,6 @@ $(document).ready(function() {
 		cat.attr("data-cur-row", rowIndex);
 		cat.attr("data-cur-col", colIndex);
 		
-		cat.css({
-			"width": "85%",
-			"height": "60%",
-			"background-color": "#123456",
-			"z-index":"2",
-			"border-radius" : "5px",
-			"color" : "#FFFFFF",
-			"border" : "2px solid #FFFFFF",
-			"margin" : "auto",
-			"padding" : "5px",
-		});
-		
 		cat.draggable({
 			revert: "invalid",
 			cursorAt: {top:20},
@@ -183,7 +171,16 @@ $(document).ready(function() {
 			},
 		});
 		
-		cat.resizable();
+		cat.resizable({
+			start: function(e,ui){
+				
+			},
+			stop: function(e, ui){
+				var gridHeight = $(".gridded").height();
+				var gridWidth = $(".gridded").width();
+				
+			},
+		});
 		
 		cat.on("click", function(e){
 			if ($("#mouseFollow").css('opacity') != 0){
