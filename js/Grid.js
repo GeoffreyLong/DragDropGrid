@@ -304,11 +304,11 @@ $(document).ready(function() {
 		});
 		$(".gridded").droppable({
 			over : function(e, ui){
+				$(".gridded").css({
+					"background" : "rgba(0,0,0,0)",
+				});
 				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0.4)");
 			},
-			out : function(e, ui){
-				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0)");
-			}
 		});
 	});
 });
