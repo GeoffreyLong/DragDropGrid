@@ -309,6 +309,11 @@ $(document).ready(function() {
 				});
 				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0.4)");
 			},
+			drop : function(e, ui){
+				$(".gridded").css({
+					"background" : "rgba(0,0,0,0)",
+				});
+			}
 		});
 	});
 });
