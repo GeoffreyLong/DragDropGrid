@@ -20,11 +20,6 @@ $(document).ready(function() {
 		 			var dragged = ui.helper;
 		 			
 		 			if (grid.checkArea($(this), dragged)){
-		 				dragged.css({
-							"top" : "0px",
-							"left": "4%",
-						});
-
 			 			grid.changeArea(dragged, false);
 			 			
 			 			dragged.attr("data-cur-col", $(this).attr("data-col"));
@@ -39,11 +34,11 @@ $(document).ready(function() {
 		 						'[data-row = '+(dragged.attr("data-cur-Row"))+']');
 		 				lastBlock.append(dragged);
 		 				grid.changeArea(dragged, true);
-		 				dragged.css({
-							"top" : "0px",
-							"left": "4%",
-						});
 		 			}
+	 				dragged.css({
+						"top" : "0px",
+						"left": "4%",
+					});
 		  		},
 		  		out: function(e, ui){
 		  			var dragged = ui.helper;
@@ -54,6 +49,7 @@ $(document).ready(function() {
 			    },
 			});
 		},
+		
 		checkArea : function(cell, element){
 			var lastCellRow = parseInt(cell.attr("data-row"));
 			var rowSize = parseInt(element.attr("data-size-row"));
@@ -75,6 +71,7 @@ $(document).ready(function() {
 			}
 			return isEmpty;
 		},
+		
 		changeArea : function(element, isFull){
 			var cellRow = parseInt(element.attr("data-cur-row"));
 			var cellCol = parseInt(element.attr("data-cur-col"));
@@ -273,4 +270,13 @@ $(document).ready(function() {
 	
 	grid.init();
 	grid.dropInit();
+	
+	$("#freeze").on("click", function(){
+		if($( ".object" ).draggable( "option", "disabled" )){
+			$(".object").draggable("enable");
+		}
+		else{
+			$(".object").draggable("disable");
+		}
+	});
 });

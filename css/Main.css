@@ -61,3 +61,15 @@ body{
 	border : 2px solid #FFFFFF;
 	padding : 5px;
 }
+#freeze{
+	cursor:pointer;
+	position:absolute;
+	top:.5%;
+	left:1.2%;
+	width:7%;
+	height:4%;
+	background:#A9128A;
+}
+.ui-state-disabled { 
+	opacity:1; 
+}
