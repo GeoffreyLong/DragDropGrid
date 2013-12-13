@@ -179,6 +179,17 @@ $(document).ready(function() {
 				var gridHeight = $(".gridded").height();
 				var gridWidth = $(".gridded").width();
 				
+				var heightChange = $(this).height() - ui.originalSize["height"];
+				var widthChange = $(this).width() - ui.originalSize["width"];
+				
+				heightChange /= gridHeight;
+				widthChange /= gridWidth;
+				
+				var newRows = heightChange + parseInt($(this).attr("data-size-Row"));
+				var newCols = widthChange + parseInt($(this).attr("data-size-Col"));;
+				
+				$(this).attr("data-size-Row", newRows);
+				$(this).attr("data-size-Col", newCols);
 			},
 		});
 		
