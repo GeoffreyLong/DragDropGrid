@@ -309,11 +309,16 @@ $(document).ready(function() {
 				});
 				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0.4)");
 			},
-			drop : function(e, ui){
+		});
+		$(".object").draggable({
+			stop: function(e,ui){
+				$(this).css({
+					"z-index" : "2",
+				});
 				$(".gridded").css({
 					"background" : "rgba(0,0,0,0)",
 				});
-			}
+			},
 		});
 	});
 });
