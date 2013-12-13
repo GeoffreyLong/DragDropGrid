@@ -23,7 +23,6 @@ $(document).ready(function(){
 							  $(":focus").each(function() {
 								    if (this.id == "catHidden"){
 								        setTimeout(function(){
-								        	console.log($("#catHidden").val());
 									    	ctrlControl.newLink($("#catHidden").val());
 								        }, 100);
 								    }
