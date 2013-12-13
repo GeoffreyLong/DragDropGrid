@@ -22,8 +22,10 @@ $(document).ready(function(){
 						  if(e.keyCode == 86){
 							  $(":focus").each(function() {
 								    if (this.id == "catHidden"){
-								    	ctrlControl.newLink($("#catHidden").val());
-								    	$("#catHidden").val("");
+								        setTimeout(function(){
+								        	console.log($("#catHidden").val());
+									    	ctrlControl.newLink($("#catHidden").val());
+								        }, 100);
 								    }
 							  });
 						  }
@@ -46,6 +48,7 @@ $(document).ready(function(){
 			
 			
 			newLink: function(name){
+				$("#catHidden").val("");
 				$("#catForm").fadeOut().delay(400).queue(function(n) {
 					$("#catName").val("");
 					//This either...I will figure it out later I guess...
