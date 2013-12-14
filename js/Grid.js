@@ -298,6 +298,14 @@ $(document).ready(function() {
 	});
 	
 	
+	/*
+	 * NOTER:: as it stands this logic isn't too good,
+	 * it is just to show what the final form will look like somewhat.
+	 * As a result some of the things don't work as well as they should, 
+	 * for intance any cats that are added after the altview is clicked 
+	 * will not have the logic shown here as the logic is redeclared as it 
+	 * was prevously.
+	 */
 	$("#altView").on("click", function(){
 		$(".gridded").css({
 			"background":"rgba(0,0,0,0)",
