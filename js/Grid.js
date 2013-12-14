@@ -209,7 +209,7 @@ $(document).ready(function() {
 		});
 		
 		cat.on("click", function(e){
-			if ($("#mouseFollow").css('opacity') != 0){
+			if ($('#mouseFollow > img').attr('id') == "favicon"){
 				var name = $("#mouseFollow").attr("data-name");
 				$("#mouseFollow").css('opacity','0');
 				$("#mouseFollow").attr("data-name", "");
@@ -269,7 +269,8 @@ $(document).ready(function() {
 		cell.attr("data-row", rowIndex);
 		cell.attr("data-isOccupied", false);
 		cell.on("click", function(e){
-			if ($("#mouseFollow").css('opacity') != 0 && isEmpty){
+			if ($('#mouseFollow > img').attr('id') == "newCat"
+				&& cell.attr("data-isOccupied") == "false"){
 				var name = $("#mouseFollow").attr("data-name");
 				$("#mouseFollow").css('opacity','0');
 				$("#mouseFollow").attr("data-name", "");

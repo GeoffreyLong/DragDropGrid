@@ -79,3 +79,7 @@ body{
 .ui-state-disabled { 
 	opacity:1; 
 }
+#newCat{
+	height:16px;
+	width:16px;
+}

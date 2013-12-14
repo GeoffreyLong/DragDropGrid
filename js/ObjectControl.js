@@ -36,7 +36,7 @@ $(document).ready(function(){
 					  if (e.keyCode == 13 && isForm){
 						  $(":focus").each(function() {
 							    if (this.id == "catName"){
-							    	ctrlControl.newLink($("#catName").val());
+							    	ctrlControl.newCat($("#catName").val());
 							    	isForm = false;
 							    }
 						  });
@@ -44,7 +44,24 @@ $(document).ready(function(){
 				});
 			},
 			
-			
+			//Can definitely condense this logic
+			newCat : function(name){
+				$("#catHidden").val("");
+				$("#catForm").fadeOut().delay(400).queue(function(n) {
+					$("#catName").val("");
+					//This either...I will figure it out later I guess...
+				    n();
+				});
+				$('#mouseFollow').empty();
+				$('#mouseFollow').css({
+					opacity: 1,
+					background: "rgba(255,255,255,0.5)",
+				});
+
+				var img = $('<img src="img/plusC.png" alt="" id="newCat"/>');
+				$('#mouseFollow').append(img);
+				$('#mouseFollow').attr("data-name", name);
+			},
 			
 			newLink: function(name){
 				$("#catHidden").val("");
