@@ -155,15 +155,15 @@ $(document).ready(function() {
     	gridSizing.calibrate();
     }).trigger('resize');
 	
-	function Cat(rowIndex, colIndex, rowSize, colSize, url){
+	function Cat(rowIndex, colIndex, rowSize, colSize, name){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
 		this.rowSize = rowSize;
 		this.colSize = colSize;
-		this.url = url;
+		this.name = name;
 		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
 				100 + "px; padding-top:0; padding-bottom:0;margin:0;'>" +
-        		"name" +
+        		name +
         		"</legend>" +
         		"</fieldset>");
 		cat.attr("data-size-Row", rowSize);
