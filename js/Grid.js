@@ -64,8 +64,9 @@ $(document).ready(function() {
 				for (var j = lastCellCol; j<lastCellCol+colSize; j++){
 					var cell = $('.gridded[data-row="'+ i +'"]'+
 			 				'[data-col="'+ j +'"]');
-					if (cell.attr("data-isOccupied")=='true'){
+					if (cell.attr("data-isOccupied")=='true' || cell.length==0){
 						isEmpty = false;
+						return isEmpty;
 					}
 				}
 			}
