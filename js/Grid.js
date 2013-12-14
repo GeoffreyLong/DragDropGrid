@@ -212,9 +212,10 @@ $(document).ready(function() {
 			if ($('#mouseFollow > img').attr('id') == "favicon"){
 				var name = $("#mouseFollow").attr("data-name");
 				$("#mouseFollow").css('opacity','0');
+				
 				$("#mouseFollow").attr("data-name", "");
 				//NOTER:: may want to do this instead
-				//$("#mouseFollow").empty();
+				$("#mouseFollow").empty();
 
 				var link = new Link(name, rowSize, colSize);
 				$(cat).append(link);
@@ -229,10 +230,42 @@ $(document).ready(function() {
                 	"height" : height+"%",
                 	"padding-top" : "0",
                 });
+                
+                var linkSpan = new LinkSpan(link);
 			}
 		});
 
 		return cat;
+	}
+	
+	function LinkSpan(link){
+		var linkInput = $('<input type="text" class="linkInput"/>');
+		linkInput.css({
+			"width":"100%",
+			"height":"70%",
+			"margin":"auto",
+		});
+		$(link).append(linkInput);
+		linkInput.focus();
+		$(linkInput).keydown(function(e){
+			if (e.keyCode == 13){
+				addLinkSpan();
+			}
+		});
+		$(linkInput).blur(function() {
+			addLinkSpan();
+		});
+		
+		function addLinkSpan(){
+			var name = $(linkInput).val();
+			$(linkInput).remove();
+			var linkSpan = $('<span class="linkSpan">'+name+'</span>');;
+			$(link).append(linkSpan);
+			$(".linkSpan").css({
+				"width":"90%",
+				"height":"95%",
+			});
+		}
 	}
 	
 	//NOTER:: Sizing of internal elements?
@@ -249,6 +282,7 @@ $(document).ready(function() {
 			"margin" : "5px",
 			"background-color": "#019001",
 			"z-index" : "3",
+			"text-align":"center",
 		});
 		return link;
 	}
@@ -275,7 +309,7 @@ $(document).ready(function() {
 				$("#mouseFollow").css('opacity','0');
 				$("#mouseFollow").attr("data-name", "");
 				//NOTER:: may want to do this instead
-				//$("#mouseFollow").empty();
+				$("#mouseFollow").empty();
 				var cat = new Cat(rowIndex, colIndex, 1, 1, name);
 				$(cell).append(cat);
 				gridSizing.calibrate();
