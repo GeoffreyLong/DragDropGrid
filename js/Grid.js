@@ -20,8 +20,6 @@ $(document).ready(function() {
 		 			var dragged = ui.helper;
 		 			
 		 			if (grid.checkArea($(this), dragged)){
-			 			grid.changeArea(dragged, false);
-			 			
 			 			dragged.attr("data-cur-col", $(this).attr("data-col"));
 			 			dragged.attr("data-cur-row", $(this).attr("data-row"));
 			 			
@@ -35,15 +33,18 @@ $(document).ready(function() {
 		 				lastBlock.append(dragged);
 		 				grid.changeArea(dragged, true);
 		 			}
+		 			
 	 				dragged.css({
 						"top" : "0px",
 						"left": "4%",
 					});
 		  		},
+		  		
 		  		out: function(e, ui){
 		  			var dragged = ui.helper;
 		 			grid.changeArea(dragged, false);
 		  		},
+		  		
 				accept: function (e) {
 					return true;
 			    },
