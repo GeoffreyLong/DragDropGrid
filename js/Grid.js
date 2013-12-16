@@ -105,27 +105,6 @@ $(document).ready(function() {
 			}
 		},
 	};
-
-	/*
-	 * why doesn't this work? gridSizing.bodyHeight never changes from 0
-	 * 
-	var gridSizing = {
-		bodyHeight : 0,
-		bodyWidth : 0,
-		cellHeight : 0,
-		cellWidth : 0,
-		
-		calibrate : function(){
-			bodyHeight = $("body").height();
-			bodyWidth = $("body").width();
-			cellHeight = bodyHeight * .2;
-			cellWidth = bodyWidth * .083;
-			alert(bodyHeight);
-		},
-	};
-	gridSizing.calibrate();
-	alert(gridSizing.bodyHeight);
-	*/
 	
 	var gridSizing = {
 		calibrate : function(){
