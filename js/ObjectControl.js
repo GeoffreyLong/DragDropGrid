@@ -3,11 +3,6 @@ $(document).ready(function(){
 	var ctrlControl = {
 			start : function(){
 				var isForm = false;
-				
-				var catFormOpen = (function(e){
-					$("#catForm").fadeIn();
-					$("#catName").focus();
-				});
 					
 				$(document).keydown(function(e){
 					  if (e.ctrlKey && !isForm) {
@@ -25,8 +20,13 @@ $(document).ready(function(){
 							  });
 						  }
 						  if (e.keyCode == 16) {
-							  catFormOpen();
+							  ctrlControl.catFormOpen();
 							  isForm = true;
+							  
+							  $("#catName").blur(function(){
+									ctrlControl.catFormClose();
+									isForm = false;
+							  });
 						  }
 					  }
 					  if (e.keyCode == 13 && isForm){
@@ -37,6 +37,20 @@ $(document).ready(function(){
 							    }
 						  });
 					  }
+				});
+			},
+			
+			catFormOpen : function(e){
+				$("#catForm").fadeIn().delay(300).queue(function(n) {
+					$("#catName").focus();
+					n();
+				});
+			},
+			
+			catFormClose : function(){
+				$("#catForm").fadeOut().delay(400).queue(function(n) {
+					$("#catName").val("");
+					n();
 				});
 			},
 			
@@ -70,10 +84,9 @@ $(document).ready(function(){
 			
 			clearAll : function(){
 				$("#catHidden").val("");
-				$("#catForm").fadeOut().delay(400).queue(function(n) {
-					$("#catName").val("");
-					n();
-				});
+				
+				ctrlControl.catFormClose();
+				
 				$('#mouseFollow').empty();
 				$('#mouseFollow').css({
 					opacity: 1,
