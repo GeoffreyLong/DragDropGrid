@@ -11,8 +11,6 @@ $(document).ready(function(){
 				var catFormClose = (function(){
 					$("#catForm").fadeOut(400).delay(400).queue(function(n) {
 						$("#catName").val("");
-						//I don't know what this does...
-					    n();
 					});
 				});
 					
