@@ -49,8 +49,6 @@ $(document).ready(function(){
 				$("#catHidden").val("");
 				$("#catForm").fadeOut().delay(400).queue(function(n) {
 					$("#catName").val("");
-					//This either...I will figure it out later I guess...
-				    n();
 				});
 				$('#mouseFollow').empty();
 				$('#mouseFollow').css({
@@ -67,8 +65,6 @@ $(document).ready(function(){
 				$("#catHidden").val("");
 				$("#catForm").fadeOut().delay(400).queue(function(n) {
 					$("#catName").val("");
-					//This either...I will figure it out later I guess...
-				    n();
 				});
 				$('#mouseFollow').empty();
 				$('#mouseFollow').css({
