@@ -8,11 +8,6 @@ $(document).ready(function(){
 					$("#catForm").fadeIn();
 					$("#catName").focus();
 				});
-				var catFormClose = (function(){
-					$("#catForm").fadeOut(400).delay(400).queue(function(n) {
-						$("#catName").val("");
-					});
-				});
 					
 				$(document).keydown(function(e){
 					  if (e.ctrlKey && !isForm) {
@@ -45,17 +40,8 @@ $(document).ready(function(){
 				});
 			},
 			
-			//Can definitely condense this logic
 			newCat : function(name){
-				$("#catHidden").val("");
-				$("#catForm").fadeOut().delay(400).queue(function(n) {
-					$("#catName").val("");
-				});
-				$('#mouseFollow').empty();
-				$('#mouseFollow').css({
-					opacity: 1,
-					background: "rgba(255,255,255,0.5)",
-				});
+				ctrlControl.clearAll();
 
 				var img = $('<img src="img/plusC.png" alt="" id="newCat"/>');
 				$('#mouseFollow').append(img);
@@ -63,16 +49,8 @@ $(document).ready(function(){
 			},
 			
 			newLink: function(name){
-				$("#catHidden").val("");
-				$("#catForm").fadeOut().delay(400).queue(function(n) {
-					$("#catName").val("");
-				});
-				$('#mouseFollow').empty();
-				$('#mouseFollow').css({
-					opacity: 1,
-					background: "rgba(255,255,255,0.5)",
-				});
-
+				ctrlControl.clearAll();
+				
 				var faviconUrl = name.replace(/^(http:\/\/[^\/]+).*$/, '$1') + '/favicon.ico';	
 				
 				var favicon = $('<img src="' + faviconUrl + '" alt="" id="favicon"/>');
@@ -89,6 +67,19 @@ $(document).ready(function(){
 					},
 				});
 			},
+			
+			clearAll : function(){
+				$("#catHidden").val("");
+				$("#catForm").fadeOut().delay(400).queue(function(n) {
+					$("#catName").val("");
+					n();
+				});
+				$('#mouseFollow').empty();
+				$('#mouseFollow').css({
+					opacity: 1,
+					background: "rgba(255,255,255,0.5)",
+				});
+			}
 	};
 	$(document).on("keydown", ctrlControl.start());
 	
