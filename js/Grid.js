@@ -183,8 +183,12 @@ $(document).ready(function() {
 				var newRows = heightChange + parseInt($(this).attr("data-size-Row"));
 				var newCols = widthChange + parseInt($(this).attr("data-size-Col"));;
 				
+				grid.changeArea($(this),false);
+				
 				$(this).attr("data-size-Row", newRows);
 				$(this).attr("data-size-Col", newCols);
+				
+				grid.changeArea($(this),true);
 			},
 		});
 		
