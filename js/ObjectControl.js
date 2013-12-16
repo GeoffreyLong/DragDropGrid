@@ -20,6 +20,9 @@ $(document).ready(function(){
 						  if(e.keyCode == 86){
 							  $(":focus").each(function() {
 								    if (this.id == "catHidden"){
+								    	//Delay is to make sure that the ctrl-v is 
+								    	//Caught, may want to think of a "better" 
+								    	//Way to do this
 								        setTimeout(function(){
 									    	ctrlControl.newLink($("#catHidden").val());
 								        }, 100);
@@ -69,13 +72,9 @@ $(document).ready(function(){
 					opacity: 1,
 					background: "rgba(255,255,255,0.5)",
 				});
-				var nameParts = name.split('.');
-				var faviconUrl = 'img/questionMark.png';
-				if (nameParts.length >= 2){
-					faviconUrl = name.replace(/^(http:\/\/[^\/]+).*$/, '$1') + '/favicon.ico';	
-				}
+
+				var faviconUrl = name.replace(/^(http:\/\/[^\/]+).*$/, '$1') + '/favicon.ico';	
 				
-//NOTER:: NEED CASE WHERE NO FAVICO.ICO
 				var favicon = $('<img src="' + faviconUrl + '" alt="" id="favicon"/>');
 
 				$.ajax($(favicon).attr("src"), {
@@ -92,8 +91,9 @@ $(document).ready(function(){
 			},
 	};
 	$(document).on("keydown", ctrlControl.start());
+	
+	//How to disable
 	//$(document).off("keydown", ctrlControl.start());
-
 });
 
 
@@ -101,8 +101,8 @@ $(document).ready(function(){
 $(document).bind('mousemove', function(e){
 	$('#mouseFollow').css({
 	       left:  e.pageX + 11,
-	       top:   e.pageY + 11
-	    });
+	       top:   e.pageY + 11,
+	});
 });
 
 //Fix for the scrolling when the div is dragged off the edge
