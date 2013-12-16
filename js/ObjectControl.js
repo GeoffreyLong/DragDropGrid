@@ -76,14 +76,25 @@ $(document).ready(function(){
 					background: "rgba(255,255,255,0.5)",
 				});
 				var nameParts = name.split('.');
-				var faviconUrl = '/img/defaultFavicon.png';
+				var faviconUrl = 'img/questionMark.png';
 				if (nameParts.length >= 2){
 					faviconUrl = name.replace(/^(http:\/\/[^\/]+).*$/, '$1') + '/favicon.ico';	
 				}
+				
 //NOTER:: NEED CASE WHERE NO FAVICO.ICO
 				var favicon = $('<img src="' + faviconUrl + '" alt="" id="favicon"/>');
-				$('#mouseFollow').append(favicon);
-				$('#mouseFollow').attr("data-name", name);
+
+				$.ajax($(favicon).attr("src"), {
+					statusCode: {
+						404: function() {
+							favicon = $('<img src="img/questionMark.png" alt="" id="favicon"/>');
+						},
+					},
+					complete: function(){
+						$('#mouseFollow').append(favicon);
+						$('#mouseFollow').attr("data-name", name);
+					},
+				});
 			},
 	};
 	$(document).on("keydown", ctrlControl.start());
