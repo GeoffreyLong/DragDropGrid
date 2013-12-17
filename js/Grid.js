@@ -107,35 +107,40 @@ $(document).ready(function() {
 		},
 	};
 	
-	var gridSizing = {
-		calibrate : function(){
-			var gridHeight = $(".gridded").height();
-			var gridWidth = $(".gridded").width();
-			
-			$(".link").css({
-				"height" : gridHeight*.85,
-				"width" : gridWidth*.80,
-			});
-			//Standard height, for which the body font size is correct
-			
-			var preferredHeight = 768;  
-
-			var displayHeight = $(window).height();
-			var percentage = displayHeight / preferredHeight;
-			var newFontSize = Math.floor(30 * percentage) - 1;
-			$(".object").css("font-size", newFontSize);
-			
-			$(".object").resizable("option", "grid", [gridWidth, gridHeight]);
-		}
-	};
+	function Cell(rowIndex, colIndex, isEmpty){
+		this.rowIndex = rowIndex;
+		this.colIndex = colIndex;
+		isEmpty = true;
+		var cell = $("<div>", {class: "gridded"});
+		cell.css({"width": "20%",
+			"height": "8.3%",
+			"position": "absolute",
+			"top" : rowIndex*8.3+"%",
+			"left" : colIndex*20+"%",
+			"background":"rgba(0,0,0,0.4)", 
+			"border": "2px solid #FFFFFF"});
+		cell.attr("data-col", colIndex);
+		cell.attr("data-row", rowIndex);
+		cell.attr("data-isOccupied", false);
+		cell.on("click", function(e){
+			if ($('#mouseFollow > img').attr('id') == "newCat"
+				&& cell.attr("data-isOccupied") == "false"){
+				var name = $("#mouseFollow").attr("data-name");
+				$("#mouseFollow").css('opacity','0');
+				$("#mouseFollow").attr("data-name", "");
+				//NOTER:: may want to do this instead
+				$("#mouseFollow").empty();
+				var cat = new Category(rowIndex, colIndex, 1, 1, name);
+				$(cell).append(cat);
+				gridSizing.calibrate();
+				cell.attr("data-isOccupied", true);
+				isEmpty = false;
+			}
+		});
+		return cell;
+	}
 	
-	gridSizing.calibrate();
-	
-    $(window).bind('resize', function(){
-    	gridSizing.calibrate();
-    }).trigger('resize');
-	
-	function Cat(rowIndex, colIndex, rowSize, colSize, name){
+	function Category(rowIndex, colIndex, rowSize, colSize, name){
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
 		this.rowSize = rowSize;
@@ -271,39 +276,33 @@ $(document).ready(function() {
 		return link;
 	}
 	
-	function Cell(rowIndex, colIndex, isEmpty){
-		this.rowIndex = rowIndex;
-		this.colIndex = colIndex;
-		isEmpty = true;
-		var cell = $("<div>", {class: "gridded"});
-		cell.css({"width": "20%",
-			"height": "8.3%",
-			"position": "absolute",
-			"top" : rowIndex*8.3+"%",
-			"left" : colIndex*20+"%",
-			"background":"rgba(0,0,0,0.4)", 
-			"border": "2px solid #FFFFFF"});
-		cell.attr("data-col", colIndex);
-		cell.attr("data-row", rowIndex);
-		cell.attr("data-isOccupied", false);
-		cell.on("click", function(e){
-			if ($('#mouseFollow > img').attr('id') == "newCat"
-				&& cell.attr("data-isOccupied") == "false"){
-				var name = $("#mouseFollow").attr("data-name");
-				$("#mouseFollow").css('opacity','0');
-				$("#mouseFollow").attr("data-name", "");
-				//NOTER:: may want to do this instead
-				$("#mouseFollow").empty();
-				var cat = new Cat(rowIndex, colIndex, 1, 1, name);
-				$(cell).append(cat);
-				gridSizing.calibrate();
-				cell.attr("data-isOccupied", true);
-				isEmpty = false;
+	var gridSizing = {
+			calibrate : function(){
+				var gridHeight = $(".gridded").height();
+				var gridWidth = $(".gridded").width();
+				
+				$(".link").css({
+					"height" : gridHeight*.85,
+					"width" : gridWidth*.80,
+				});
+				//Standard height, for which the body font size is correct
+				
+				var preferredHeight = 768;  
+
+				var displayHeight = $(window).height();
+				var percentage = displayHeight / preferredHeight;
+				var newFontSize = Math.floor(30 * percentage) - 1;
+				$(".object").css("font-size", newFontSize);
+				
+				$(".object").resizable("option", "grid", [gridWidth, gridHeight]);
 			}
-		});
-		return cell;
-	}
-	
+		};
+		
+		gridSizing.calibrate();
+		
+	    $(window).bind('resize', function(){
+	    	gridSizing.calibrate();
+	    }).trigger('resize');
 	
 	grid.init();
 	grid.dropInit();
