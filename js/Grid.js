@@ -13,7 +13,7 @@ $(document).ready(function() {
 		},
 		
 		dropInit: function(){
-			$(".gridded").droppable({
+			$(".cell").droppable({
 	 			tolerance: "pointer",
 				
 		 		drop: function(e,ui){
@@ -28,7 +28,7 @@ $(document).ready(function() {
 			 			$(this).append(dragged);
 		 			}
 		 			else{
-		 				var lastBlock = $('.gridded[data-col = '+(dragged.attr("data-cur-Col"))+']'+
+		 				var lastBlock = $('.cell[data-col = '+(dragged.attr("data-cur-Col"))+']'+
 		 						'[data-row = '+(dragged.attr("data-cur-Row"))+']');
 		 				lastBlock.append(dragged);
 		 				grid.changeArea(dragged, true);
@@ -63,7 +63,7 @@ $(document).ready(function() {
 			
 			for (var i = lastCellRow; i<lastCellRow+rowSize; i++){
 				for (var j = lastCellCol; j<lastCellCol+colSize; j++){
-					var cell = $('.gridded[data-row="'+ i +'"]'+
+					var cell = $('.cell[data-row="'+ i +'"]'+
 			 				'[data-col="'+ j +'"]');
 					if (cell.attr("data-isOccupied")=='true' || cell.length==0){
 						isEmpty = false;
@@ -82,7 +82,7 @@ $(document).ready(function() {
 
 			for (var i = cellRow; i<cellRow+rowSize; i++){
 				for (var j = cellCol; j<cellCol+colSize; j++){
-					var cell = $('.gridded[data-row="'+ i +'"]'+
+					var cell = $('.cell[data-row="'+ i +'"]'+
 			 				'[data-col="'+ j +'"]');
 					cell.attr("data-isOccupied", isFull);
 				}
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 			for (var i = cellRow; i<cellRow+rowSize; i++){
 				for (var j = cellCol; j<cellCol+colSize; j++){
-					var cell = $('.gridded[data-row="'+ i +'"]'+
+					var cell = $('.cell[data-row="'+ i +'"]'+
 			 				'[data-col="'+ j +'"]');
 					cell.css({
 						"background": styling,
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		this.rowIndex = rowIndex;
 		this.colIndex = colIndex;
 		isEmpty = true;
-		var cell = $("<div>", {class: "gridded"});
+		var cell = $("<div>", {class: "cell"});
 		cell.css({"width": "20%",
 			"height": "8.3%",
 			"position": "absolute",
@@ -146,7 +146,7 @@ $(document).ready(function() {
 		this.rowSize = rowSize;
 		this.colSize = colSize;
 		this.name = name;
-		var cat = $("<fieldset class='object'><legend class='fieldLeg' style='width:" +
+		var cat = $("<fieldset class='category'><legend class='fieldLeg' style='width:" +
 				100 + "px; padding-top:0; padding-bottom:0;margin:0;'>" +
         		name +
         		"</legend>" +
@@ -176,8 +176,8 @@ $(document).ready(function() {
 				
 			},
 			stop: function(e, ui){
-				var gridHeight = $(".gridded").height();
-				var gridWidth = $(".gridded").width();
+				var gridHeight = $(".cell").height();
+				var gridWidth = $(".cell").width();
 				
 				var heightChange = $(this).height() - ui.originalSize["height"];
 				var widthChange = $(this).width() - ui.originalSize["width"];
@@ -266,8 +266,8 @@ $(document).ready(function() {
 		
 		var link = $("<div>", {class: "link"});
 		link.css({
-			"width" : $(".gridded").width()*.80,
-			"height" : $(".gridded").height()*.85,
+			"width" : $(".cell").width()*.80,
+			"height" : $(".cell").height()*.85,
 			"margin" : "5px",
 			"background-color": "#019001",
 			"z-index" : "3",
@@ -278,8 +278,8 @@ $(document).ready(function() {
 	
 	var gridSizing = {
 			calibrate : function(){
-				var gridHeight = $(".gridded").height();
-				var gridWidth = $(".gridded").width();
+				var gridHeight = $(".cell").height();
+				var gridWidth = $(".cell").width();
 				
 				$(".link").css({
 					"height" : gridHeight*.85,
@@ -292,9 +292,9 @@ $(document).ready(function() {
 				var displayHeight = $(window).height();
 				var percentage = displayHeight / preferredHeight;
 				var newFontSize = Math.floor(30 * percentage) - 1;
-				$(".object").css("font-size", newFontSize);
+				$(".category").css("font-size", newFontSize);
 				
-				$(".object").resizable("option", "grid", [gridWidth, gridHeight]);
+				$(".category").resizable("option", "grid", [gridWidth, gridHeight]);
 			}
 		};
 		
@@ -308,11 +308,11 @@ $(document).ready(function() {
 	grid.dropInit();
 	
 	$("#freeze").on("click", function(){
-		if($( ".object" ).draggable( "option", "disabled" )){
-			$(".object").draggable("enable");
+		if($( ".category" ).draggable( "option", "disabled" )){
+			$(".category").draggable("enable");
 		}
 		else{
-			$(".object").draggable("disable");
+			$(".category").draggable("disable");
 		}
 	});
 	
@@ -326,23 +326,23 @@ $(document).ready(function() {
 	 * was prevously.
 	 */
 	$("#altView").on("click", function(){
-		$(".gridded").css({
+		$(".cell").css({
 			"background":"rgba(0,0,0,0)",
 		});
-		$(".gridded").droppable({
+		$(".cell").droppable({
 			over : function(e, ui){
-				$(".gridded").css({
+				$(".cell").css({
 					"background" : "rgba(0,0,0,0)",
 				});
 				grid.styleArea(ui.helper, $(this), "rgba(0,0,0,0.4)");
 			},
 		});
-		$(".object").draggable({
+		$(".category").draggable({
 			stop: function(e,ui){
 				$(this).css({
 					"z-index" : "2",
 				});
-				$(".gridded").css({
+				$(".cell").css({
 					"background" : "rgba(0,0,0,0)",
 				});
 			},
