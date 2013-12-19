@@ -41,7 +41,7 @@ $(document).ready(function(){
 			},
 			
 			catFormOpen : function(e){
-				$("#catForm").fadeIn().delay(300).queue(function(n) {
+				$("#catForm").fadeIn().delay(10).queue(function(n) {
 					$("#catName").focus();
 					n();
 				});
